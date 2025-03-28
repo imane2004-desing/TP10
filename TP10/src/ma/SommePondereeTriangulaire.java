@@ -1,25 +1,40 @@
-package ma;
+package gestionfichiers;
 
-import java.util.Scanner;
+import java.io.*;
 
 public class SommePondereeTriangulaire {
-    public static int sommeTriangulaire(int n) {
-        return n * (n + 1) / 2; // T(n) = n * (n + 1) / 2
+
+    // Fonction pour calculer le n-ième nombre triangulaire
+    public static int T(int n) {
+        return (n * (n + 1)) / 2;
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
+    public static void main(String[] args) throws IOException {
+        // Création d'un BufferedReader pour lire le fichier
+        BufferedReader br = new BufferedReader(new FileReader("good.in"));
+        
+        // Lire le nombre de datasets
+        int n = Integer.parseInt(br.readLine().trim());
 
-        for (int i = 1; i <= N; i++) {
-            int n = scanner.nextInt();
-            int sommePonderee = 0;
-
-            for (int k = 1; k <= n; k++) {
-                sommePonderee += k * sommeTriangulaire(k + 1);
+        // Créer un PrintWriter pour écrire dans le fichier de sortie
+        PrintWriter writer = new PrintWriter(new FileWriter("good.out"));
+        
+        // Pour chaque dataset
+        for (int i = 1; i <= n; i++) {
+            int num = Integer.parseInt(br.readLine().trim());
+            
+            // Calcul de la somme pondérée
+            int sum = 0;
+            for (int k = 1; k <= num; k++) {
+                sum += k * T(k + 1);
             }
 
-            System.out.println(i + " " + n + " " + sommePonderee);
+            // Afficher le numéro du dataset et le résultat
+            writer.println(i + " " + num + " " + sum);
         }
+
+        // Fermer le BufferedReader et le PrintWriter
+        br.close();
+        writer.close();
     }
 }
