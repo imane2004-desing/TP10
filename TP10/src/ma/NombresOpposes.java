@@ -8,7 +8,7 @@ public class NombresOpposes {
 
     public static void main(String[] args) throws IOException {
         // Création d'un BufferedReader pour lire le fichier
-        BufferedReader br = new BufferedReader(new FileReader("input.txt"));
+        BufferedReader br = new BufferedReader(new FileReader("System.in"));
         
         // Lire la taille du tableau
         int n = Integer.parseInt(br.readLine().trim());
@@ -33,7 +33,7 @@ public class NombresOpposes {
         }
 
         // Afficher le résultat dans un fichier
-        PrintWriter writer = new PrintWriter(new FileWriter("output.txt"));
+        PrintWriter writer = new PrintWriter(new FileWriter("System.out"));
         writer.println(count);
         writer.close();
 
