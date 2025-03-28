@@ -1,28 +1,45 @@
 package ma;
 
+import java.io.*;
 import java.util.*;
 
 public class NombresOpposes {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-        Set<Integer> ensemble = new HashSet<>();
-        
-        // Lire les éléments du tableau
-        for (int i = 0; i < N; i++) {
-            int element = scanner.nextInt();
-            ensemble.add(element);
-        }
+        try {
+          
+            BufferedReader lecteur = new BufferedReader(new FileReader("System.in"));
+            PrintWriter ecrivain = new PrintWriter(new FileWriter("System.out"));
+            
 
-        int compteur = 0;
-
-        // Vérifier les entiers positifs dont l'opposé est aussi dans le tableau
-        for (int element : ensemble) {
-            if (element > 0 && ensemble.contains(-element)) {
-                compteur++;
+            int nombreEl = Integer.parseInt(lecteur.readLine());
+            
+         
+            String ligneNombres = lecteur.readLine();
+            String[] nombresTextes = ligneNombres.split(" ");
+            
+            
+            Set<Integer> nombresUniques = new HashSet<>();
+            for (String texte : nombresTextes) {
+                nombresUniques.add(Integer.parseInt(texte));
             }
+            
+            
+            int compt = 0;
+            for (int nombre : nombresUniques) {
+                if (nombre > 0 && nombresUniques.contains(-nombre)) {
+                	compt++;
+                }
+            }
+            
+            
+            ecrivain.println(compt);
+            
+        
+            lecteur.close();
+            ecrivain.close();
+            
+        } catch (Exception e) {
+            System.out.println("Une erreur est survenue : " + e.getMessage());
         }
-
-        System.out.println(compteur);
     }
 }
